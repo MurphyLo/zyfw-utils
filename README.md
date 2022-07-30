@@ -1,2 +1,16 @@
 # zyfw-utils
 获取教务系统中最新且可用的选课列表并导出 excel 文档用于课程筛选
+
+整合登录功能，使用学号及数字京师密码即可使用程序。
+
+
+
+请务必将 main.py, des.js 文件下载后放在同一目录下，
+
+运行程序前需编辑 main.py 中文件末尾的 student_number, password 变量。
+
+
+
+导出 excel 文档样例：
+
+![sample](assest\sample.png)
