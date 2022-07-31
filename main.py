@@ -33,7 +33,7 @@ map_cols = {
     'syjx': '双语教学',
     'jpkc': '精品课程',
     'skbjdm': '课程代码-班号',
-    'skfs_m': '授课方式',
+    'skfs_m': '授课方式代码',
     'xqdm': '校区代码',
 }
 
@@ -296,7 +296,7 @@ if __name__ == '__main__':
     # 映射表头名称，无效数据清理
     df.index.name = '序号'
     df.columns = df.columns.map(map_cols)
-    df = df.drop(['精品课程', '双语教学', '校区代码'], axis=1)
+    df = df.drop(['精品课程', '双语教学', '校区代码', '授课方式代码'], axis=1)
 
     # 优化数据内容（上课时间），以便于在 excel 中作数据筛选
     new_cols = ['上课时间(日)', '上课时间(节)']
@@ -306,5 +306,6 @@ if __name__ == '__main__':
     df = df.drop('上课时间', axis=1)
 
     # 存储课表到同一文件夹内，以时间为 sheet 名称
-    file = f"Grade{info['nj']}-{info['zydm']}-s{info['xn']},{info['xqM']}_table.xlsx"
+    map_xq = {'0': '秋季学期', '1': '春季学期'}
+    file = f"{info['zydm']}专业{info['nj']}级{info['xn']}-{str(int(info['xn'])+1)}学年{map_xq[info['xqM']]}课程安排明细.xlsx"
     save_table(df, file)
