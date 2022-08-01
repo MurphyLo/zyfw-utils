@@ -38,6 +38,17 @@ map_cols = {
 }
 
 
+def download_des():
+    url = 'https://gitee.com/aksprince/bnu-utils/raw/master/des.js'
+    try:
+        res = requests.get(url, timeout=2)
+    except requests.exceptions.ConnectTimeout:
+        print(ERROR + 'Connection failed. Make sure you are connected to the Internet!')
+    with open('des.js', 'wb') as f:
+        f.write(res.content)
+    print(INFO + 'Download des.js successfully!')
+    
+
 def get_session(u, p, func_des) -> object:
     print('''
     ------------------------------
@@ -279,13 +290,14 @@ if __name__ == '__main__':
 
     * 注意：请确保修改后的变量为字符串类型
     '''
-    student_number = 'xxxxxxxxxxxx'
-    password = 'xxxxxxxx'
+    student_number = input('请输入12位学号：')
+    password = input('请输入数字京师密码：')
     modify_xn = None
     modify_xq = None
 
 
     # 使用账号密码登录
+    download_des()
     func_des = execjs.compile(read_file("des.js"))
     s = get_session(student_number, password, func_des)
     info = get_account_info(s)
@@ -309,3 +321,5 @@ if __name__ == '__main__':
     map_xq = {'0': '秋季学期', '1': '春季学期'}
     file = f"{info['zydm']}专业{info['nj']}级{info['xn']}-{str(int(info['xn'])+1)}学年{map_xq[info['xqM']]}课程安排明细.xlsx"
     save_table(df, file)
+    os.system('pause')
+    sys.exit()
