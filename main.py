@@ -44,6 +44,8 @@ def download_des():
         res = requests.get(url, timeout=2)
     except requests.exceptions.ConnectTimeout:
         print(ERROR + 'Connection failed. Make sure you are connected to the Internet!')
+        os.system('pause')
+        sys.exit()
     with open('des.js', 'wb') as f:
         f.write(res.content)
     print(INFO + 'Download des.js successfully!')
