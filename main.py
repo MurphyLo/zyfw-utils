@@ -262,6 +262,9 @@ def save_table(df, file):
     with pd.ExcelWriter(file, engine='xlsxwriter') as writer:
         df.to_excel(writer, sheet_name=t)
         worksheet = writer.sheets[t]
+        col_width = [6, 30, 6, 6, 6, 32, 9, 9, 9, 12, 9, 9, 9, 9, 16, 16, 12, 12]
+        for i in range(len(df.columns)+1):
+            worksheet.set_column(i, i, col_width[i])
         workbook = writer.book
         fmt = workbook.add_format({
             'bg_color': '#e2efda',
