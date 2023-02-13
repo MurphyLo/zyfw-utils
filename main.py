@@ -86,8 +86,9 @@ def get_session(u, p, func_des) -> object:
         "_eventId": "submit"
     }
     session.post(res.url, data=payload)
-    if len(session.cookies.items()) == 4:
+    if len(session.cookies.items()) >= 4:
         print(INFO + 'Login successfully!')
+        session.get(url)
     else:
         print(ERROR + 'Login failed! Perhaps using the wrong password.')
         os.system('pause')
