@@ -1,8 +1,8 @@
 requests
 bs4
-beautifulsoup4
 faker
 pandas
 lxml
 xlsxwriter
+openpyxl
 pyexecjs2
